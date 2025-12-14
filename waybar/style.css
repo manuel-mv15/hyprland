@@ -1,0 +1,81 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Font Awesome 6 Free", "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(21, 18, 27, 0);
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #11111b;
+}
+
+#workspaces button {
+    padding: 5px;
+    color: #313244;
+    margin-right: 5px;
+}
+
+#workspaces button.active {
+    color: #a6e3a1;
+    background: #11111b;
+    border-radius: 10px;
+}
+
+#workspaces button:hover {
+    background: #11111b;
+    color: #cdd6f4;
+    border-radius: 10px;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+#tray {
+    background: #1e1e2e;
+    padding: 0px 10px;
+    margin: 3px 3px 3px 3px;
+    color: #cdd6f4;
+    border-radius: 10px;
+    border: 1px solid #11111b;
+}
+
+#clock {
+    color: #fab387;
+}
+
+#battery {
+    color: #a6e3a1;
+}
+
+#battery.charging {
+    color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+#pulseaudio {
+    color: #89b4fa;
+}
+
+#pulseaudio.muted {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+#tray {
+    background-color: #292c3c;
+}
