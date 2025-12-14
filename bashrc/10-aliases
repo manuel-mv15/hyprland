@@ -15,9 +15,9 @@ alias lt='eza -a --tree --level=1 --icons=always'
 alias shutdown='systemctl poweroff'
 alias v='$EDITOR'
 alias vim='$EDITOR'
-alias ts='~/.config/ml4w/scripts/arch/snapshot.sh'
+alias ts='~/.config/scripts/arch/snapshot.sh'
 alias wifi='nmtui'
-alias cleanup='~/.config/ml4w/scripts/arch/cleanup.sh'
+alias cleanup='~/.config/scripts/arch/cleanup.sh'
 
 # -----------------------------------------------------
 # ML4W Apps
@@ -30,8 +30,8 @@ alias ml4w-sidebar='flatpak run com.ml4w.sidebar'
 alias ml4w-options='ml4w-hyprland-setup -m options'
 alias ml4w-diagnosis='~/.config/hypr/scripts/diagnosis.sh'
 alias ml4w-hyprland-diagnosis='~/.config/hypr/scripts/diagnosis.sh'
-alias ml4w-qtile-diagnosis='~/.config/ml4w/qtile/scripts/diagnosis.sh'
-alias ml4w-update='~/.config/ml4w/scripts/installupdates.sh'
+alias ml4w-qtile-diagnosis='~/.config/qtile/scripts/diagnosis.sh'
+alias ml4w-update='~/.config/scripts/installupdates.sh'
 
 # -----------------------------------------------------
 # Window Managers
@@ -57,7 +57,7 @@ alias gcredential="git config credential.helper store"
 # -----------------------------------------------------
 # Scripts
 # -----------------------------------------------------
-alias ascii='~/.config/ml4w/scripts/figlet.sh'
+alias ascii='~/.config/scripts/figlet.sh'
 
 # -----------------------------------------------------
 # System
