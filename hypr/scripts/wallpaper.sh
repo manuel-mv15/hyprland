@@ -12,7 +12,7 @@ source $HOME/.config/ml4w/library.sh
 # Check to use wallpaper cache
 # -----------------------------------------------------
 
-if [ -f ~/.config/ml4w/settings/wallpaper_cache ]; then
+if [ -f ~/.config/settings/wallpaper_cache ]; then
     use_cache=1
     _writeLog "Using Wallpaper Cache"
 else

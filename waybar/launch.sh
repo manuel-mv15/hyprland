@@ -32,20 +32,20 @@ default_theme="/ml4w-modern;/ml4w-modern/default"
 # Remove incompatible themes
 # -----------------------------------------------------
 
-if [ -f ~/.config/ml4w/settings/waybar-theme.sh ]; then
-    themestyle=$(cat ~/.config/ml4w/settings/waybar-theme.sh)
+if [ -f ~/.config/settings/waybar-theme.sh ]; then
+    themestyle=$(cat ~/.config/settings/waybar-theme.sh)
     case "$themestyle" in
     "/ml4w-modern;/ml4w-modern/light")
-        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        echo "$default_theme" >~/.config/settings/waybar-theme.sh
         ;;
     "/ml4w-modern;/ml4w-modern/dark")
-        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        echo "$default_theme" >~/.config/settings/waybar-theme.sh
         ;;
     "/ml4w;/ml4w/light")
-        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        echo "$default_theme" >~/.config/settings/waybar-theme.sh
         ;;
     "/ml4w;/ml4w/dark")
-        echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+        echo "$default_theme" >~/.config/settings/waybar-theme.sh
         ;;
     *)
         echo
@@ -66,14 +66,14 @@ if [ -f ~/.config/ml4w/settings/waybar-theme.sh ]; then
 fi
 
 # -----------------------------------------------------
-# Get current theme information from ~/.config/ml4w/settings/waybar-theme.sh
+# Get current theme information from ~/.config/settings/waybar-theme.sh
 # -----------------------------------------------------
 
-if [ -f ~/.config/ml4w/settings/waybar-theme.sh ]; then
-    themestyle=$(cat ~/.config/ml4w/settings/waybar-theme.sh)
+if [ -f ~/.config/settings/waybar-theme.sh ]; then
+    themestyle=$(cat ~/.config/settings/waybar-theme.sh)
 else
-    touch ~/.config/ml4w/settings/waybar-theme.sh
-    echo "$default_theme" >~/.config/ml4w/settings/waybar-theme.sh
+    touch ~/.config/settings/waybar-theme.sh
+    echo "$default_theme" >~/.config/settings/waybar-theme.sh
     themestyle=$default_theme
 fi
 
