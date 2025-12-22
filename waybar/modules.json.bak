@@ -69,6 +69,7 @@
     "format": "",
     "tooltip-format": "Tools"
   },
+
   // Now Playing
   "custom/nowplaying": {
     "exec": "~/.config/scripts/now-playing.sh",
@@ -82,6 +83,7 @@
     "on-click-middle": "playerctl previous",
     "tooltip-format": "Left: Play/Pause\nRight: Next\nMiddle: Previous"
   },
+  
   // Cliphist
   "custom/cliphist": {
     "format": "",
@@ -173,8 +175,7 @@
       "inhibited-notification": "<span foreground='red'><sup></sup></span>",
       "inhibited-none": "",
       "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": "",
-      "notifications_active": "<span foreground='red'><sup></sup></span>"
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -224,19 +225,17 @@
   },
   // System
   "custom/system": {
-    "format": "",
-    "tooltip": "Open System Monitor (btop)",
-    "on-click": "kitty -e btop"
+    "format": "",
+    "tooltip": false
   },
   // CPU
   "cpu": {
-    "format": " {usage}%",
-    "tooltip": true,
+    "format": "/ C {usage}% ",
     "on-click": "~/.config/settings/system-monitor.sh"
   },
   // Memory
   "memory": {
-    "format": " {}%",
+    "format": "/ M {}% ",
     "on-click": "~/.config/settings/system-monitor.sh"
   },
   // Harddisc space used
@@ -304,7 +303,19 @@
     ]
   },
   // Network
-  // Network removed
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "Disconnected ⚠",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "~/.config/settings/networkmanager.sh",
+    "on-click-right": "~/.config/scripts/nm-applet.sh toggle",
+  },
   // Battery
   "battery": {
     "interval": 1,
@@ -344,8 +355,8 @@
     // "scroll-step": 1, // %, can be a float
     "format": "{icon}  {volume}%",
     "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
