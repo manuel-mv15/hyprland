@@ -3,7 +3,7 @@
 # -----------------------------------------------------
 # Load Launcher
 # -----------------------------------------------------
-launcher=$(cat $HOME/.config/ml4w/settings/launcher)
+launcher=$(cat $HOME/.config/settings/launcher)
 
 # Use Walker
 _launch_walker() {
@@ -12,7 +12,13 @@ _launch_walker() {
 
 # Use Rofi
 _launch_rofi() {
-    pkill rofi || rofi -show drun -replace -i  
+    if command -v rofi &> /dev/null; then
+        pkill rofi || rofi -show drun -replace -i
+    elif command -v wofi &> /dev/null; then
+        pkill wofi || wofi --show drun
+    else
+        notify-send "launcher" "rofi and wofi not found"
+    fi
 }
 
 if [ "$launcher" == "walker" ]; then

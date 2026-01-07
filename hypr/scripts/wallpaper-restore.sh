@@ -16,7 +16,7 @@
 
 ml4w_cache_folder="$HOME/.cache/ml4w/hyprland-dotfiles"
 
-defaultwallpaper="$HOME/.config/ml4w/wallpapers/default.jpg"
+defaultwallpaper="$HOME/.config/wallpapers/default.jpg"
 
 cachefile="$ml4w_cache_folder/current_wallpaper"
 
@@ -43,7 +43,15 @@ fi
 # -----------------------------------------------------
 
 echo ":: Setting wallpaper with source image $wallpaper"
-if [ -f ~/.local/bin/waypaper ]; then
-    export PATH=$PATH:~/.local/bin/
+if command -v waypaper &> /dev/null; then
+    if [ -f ~/.local/bin/waypaper ]; then
+        export PATH=$PATH:~/.local/bin/
+    fi
+    waypaper --wallpaper "$wallpaper"
+elif command -v hyprctl &> /dev/null; then
+    echo ":: waypaper not found. Using hyprctl."
+    hyprctl hyprpaper preload "$wallpaper"
+    hyprctl hyprpaper wallpaper ",$wallpaper"
+else
+    echo ":: Neither waypaper nor hyprctl found."
 fi
-waypaper --wallpaper "$wallpaper"

@@ -10,7 +10,7 @@
 # -----------------------------------------------------
 # Load Launcher
 # -----------------------------------------------------
-launcher=$(cat $HOME/.config/ml4w/settings/launcher)
+launcher=$(cat $HOME/.config/settings/launcher)
 
 case $1 in
     d)

@@ -6,7 +6,7 @@
 #                /_/       /_/             
 
 # Source library.sh
-source $HOME/.config/ml4w/library.sh
+source $HOME/.config/library.sh
 
 # -----------------------------------------------------
 # Check to use wallpaper cache
@@ -52,11 +52,17 @@ cachefile="$ml4w_cache_folder/current_wallpaper"
 blurredwallpaper="$ml4w_cache_folder/blurred_wallpaper.png"
 squarewallpaper="$ml4w_cache_folder/square_wallpaper.png"
 rasifile="$ml4w_cache_folder/current_wallpaper.rasi"
-blurfile="$HOME/.config/ml4w/settings/blur.sh"
-defaultwallpaper="$HOME/.config/ml4w/wallpapers/default.jpg"
-wallpapereffect="$HOME/.config/ml4w/settings/wallpaper-effect.sh"
+blurfile="$HOME/.config/settings/blur.sh"
+defaultwallpaper="$HOME/.config/wallpapers/default.jpg"
+wallpapereffect="$HOME/.config/settings/wallpaper-effect.sh"
 blur="50x30"
-blur=$(cat $blurfile)
+if [ -f "$blurfile" ]; then
+    blur=$(cat "$blurfile")
+fi
+
+if [ -z "$blur" ]; then
+    blur="50x30"
+fi
 
 # -----------------------------------------------------
 # Get selected wallpaper
@@ -129,11 +135,15 @@ THEME_PREF=$(grep -E '^gtk-application-prefer-dark-theme=' "$SETTINGS_FILE" | aw
 # Execute matugen
 # -----------------------------------------------------
 
-_writeLog "Execute matugen with $used_wallpaper"
-if [ "$THEME_PREF" -eq 1 ]; then
-    matugen image $used_wallpaper -m "dark"
+if command -v matugen &> /dev/null; then
+    _writeLog "Execute matugen with $used_wallpaper"
+    if [ "$THEME_PREF" -eq 1 ]; then
+        matugen image $used_wallpaper -m "dark"
+    else
+        matugen image $used_wallpaper -m "light"
+    fi
 else
-    matugen image $used_wallpaper -m "light"
+    _writeLog "matugen not found, skipping theme update"
 fi
 
 # -----------------------------------------------------
@@ -168,20 +178,24 @@ swaync-client -rs
 # Created blurred wallpaper
 # -----------------------------------------------------
 
-if [ -f $generatedversions/blur-$blur-$effect-$wallpaperfilename.png ] && [ "$force_generate" == "0" ] && [ "$use_cache" == "1" ]; then
-    _writeLog "Use cached wallpaper blur-$blur-$effect-$wallpaperfilename"
-else
-    _writeLog "Generate new cached wallpaper blur-$blur-$effect-$wallpaperfilename with blur $blur"
-    # notify-send --replace-id=1 "Generate new blurred version" "with blur $blur" -h int:value:66
-    magick $used_wallpaper -resize 75% $blurredwallpaper
-    _writeLog "Resized to 75%"
-    if [ ! "$blur" == "0x0" ]; then
-        magick $blurredwallpaper -blur $blur $blurredwallpaper
-        cp $blurredwallpaper $generatedversions/blur-$blur-$effect-$wallpaperfilename.png
-        _writeLog "Blurred"
+if command -v magick &> /dev/null; then
+    if [ -f $generatedversions/blur-$blur-$effect-$wallpaperfilename.png ] && [ "$force_generate" == "0" ] && [ "$use_cache" == "1" ]; then
+        _writeLog "Use cached wallpaper blur-$blur-$effect-$wallpaperfilename"
+    else
+        _writeLog "Generate new cached wallpaper blur-$blur-$effect-$wallpaperfilename with blur $blur"
+        # notify-send --replace-id=1 "Generate new blurred version" "with blur $blur" -h int:value:66
+        magick $used_wallpaper -resize 75% $blurredwallpaper
+        _writeLog "Resized to 75%"
+        if [ ! "$blur" == "0x0" ]; then
+            magick $blurredwallpaper -blur $blur $blurredwallpaper
+            cp $blurredwallpaper $generatedversions/blur-$blur-$effect-$wallpaperfilename.png
+            _writeLog "Blurred"
+        fi
     fi
+    cp $generatedversions/blur-$blur-$effect-$wallpaperfilename.png $blurredwallpaper
+else
+    _writeLog "magick (ImageMagick) not found, skipping blur generation"
 fi
-cp $generatedversions/blur-$blur-$effect-$wallpaperfilename.png $blurredwallpaper
 
 # -----------------------------------------------------
 # Create rasi file
@@ -196,6 +210,8 @@ echo "* { current-image: url(\"$blurredwallpaper\", height); }" >"$rasifile"
 # Created square wallpaper
 # -----------------------------------------------------
 
-_writeLog "Generate new cached wallpaper square-$wallpaperfilename"
-magick $tmpwallpaper -gravity Center -extent 1:1 $squarewallpaper
-cp $squarewallpaper $generatedversions/square-$wallpaperfilename.png
+if command -v magick &> /dev/null; then
+    _writeLog "Generate new cached wallpaper square-$wallpaperfilename"
+    magick $tmpwallpaper -gravity Center -extent 1:1 $squarewallpaper
+    cp $squarewallpaper $generatedversions/square-$wallpaperfilename.png
+fi

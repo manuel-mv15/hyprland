@@ -9,11 +9,11 @@
 # -----------------------------------------------------
 # Load Launcher
 # -----------------------------------------------------
-launcher=$(cat $HOME/.config/ml4w/settings/launcher)
+launcher=$(cat $HOME/.config/settings/launcher)
 
 # Configuration
 SIDEPAD_PATH="$HOME/.config/sidepad/sidepad"
-SIDEPAD_DATA="$HOME/.config/ml4w/settings/sidepad-active"
+SIDEPAD_DATA="$HOME/.config/settings/sidepad-active"
 SIDEPAD_PADS_FOLDER="$HOME/.config/sidepad/pads"
 SIDEPAD_SELECT="$HOME/.config/sidepad/scripts/select.sh"
 

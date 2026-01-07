@@ -7,7 +7,7 @@
     "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
-        "custom/appmenu",
+        "custom/appmenuicon",
         "hyprland/workspaces"
     ],
     "modules-center": [
