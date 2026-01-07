@@ -48,8 +48,11 @@ if command -v waypaper &> /dev/null; then
         export PATH=$PATH:~/.local/bin/
     fi
     waypaper --wallpaper "$wallpaper"
+elif command -v swww &> /dev/null; then
+    echo ":: waypaper not found. Using swww."
+    swww img "$wallpaper" --transition-type any --transition-step 90
 elif command -v hyprctl &> /dev/null; then
-    echo ":: waypaper not found. Using hyprctl."
+    echo ":: waypaper/swww not found. Using hyprctl."
     hyprctl hyprpaper preload "$wallpaper"
     hyprctl hyprpaper wallpaper ",$wallpaper"
 else
