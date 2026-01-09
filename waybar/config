@@ -16,7 +16,6 @@
     "modules-right": [
         "pulseaudio",
         "custom/system",
-        "tray",
         "custom/exit",
         "custom/notification",
         "clock",
